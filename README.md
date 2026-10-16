@@ -17,21 +17,15 @@
 | [**openKleinsServer**](https://github.com/AkiharaHoshina/openKleinsServer) | **假服务端**：接住客户端发过来的协议（HTTP 层 + 业务层），回它想要的应答；存档、配置表、日志都落在你自己的机器上 | 要 |
 | [**openKleinsPatcher**](https://github.com/AkiharaHoshina/openKleinsPatcher) | **客户端补丁器**：把客户端里那几个"不许连私服"的地方改掉（平台 URL、完整性校验、Lua 覆盖层） | 要 |
 
-两个都得用。**先起服务端，再起游戏** —— 顺序反了客户端会因为找不到目录而报错。
+两个都得用。**顺序：先给客户端打补丁 → 再启动服务端 → 最后启动游戏** —— 反了会出问题，详见下面。
 
 ---
 
 ## 快速开始
 
-### 1. 拿服务端
+> ★★★ **顺序：先给客户端打补丁 → 再启动服务端 → 最后启动游戏。** 别反过来，原因见第 1 步。
 
-去 [openKleinsServer 的 Releases](https://github.com/AkiharaHoshina/openKleinsServer/releases)
-下 `openKleinsServer-v0.9.1.zip`，解压到一个**空目录**（别放在受保护的位置），双击 `启动服务端.bat`。
-
-窗口里出现 `[OK] HTTP 层 127.0.0.1:10300` / `[OK] 业务层 127.0.0.1:10301` 就算起来了。
-关服务端就双击 `停止服务端.bat`。
-
-### 2. 拿补丁器并打补丁
+### 1. 拿补丁器，先给客户端打补丁
 
 去 [openKleinsPatcher 的 Releases](https://github.com/AkiharaHoshina/openKleinsPatcher/releases)
 下 `openKleinsPatcher-v0.9.1.zip`，解压。
@@ -44,6 +38,18 @@
 
 预检跑完会给每项标「已就绪 / 需处理」，然后按 `P` 打补丁。它会**先把原文件备份**到
 `<客户端>\_kleins_backup\`，想退回去按 `R` 就行。
+
+> **为什么补丁必须在前？** 补丁要把客户端里的服务端地址改成 `127.0.0.1`。
+> 顺序反了（服务端先开着、拿**没打过补丁**的客户端去连），客户端可能提示**网络问题** ——
+> 它手里的地址还是官方那个，早就没了。这是**已知问题**；补丁过之后就不用担心了。
+
+### 2. 拿服务端并开服
+
+去 [openKleinsServer 的 Releases](https://github.com/AkiharaHoshina/openKleinsServer/releases)
+下 `openKleinsServer-v0.9.1.zip`，解压到一个**空目录**（别放在受保护的位置），双击 `启动服务端.bat`。
+
+窗口里出现 `[OK] HTTP 层 127.0.0.1:10300` / `[OK] 业务层 127.0.0.1:10301` 就算起来了。
+关服务端就双击 `停止服务端.bat`。
 
 ### 3. 起游戏
 
