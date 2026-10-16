@@ -55,10 +55,13 @@
   补丁用过之后就不用担心了。游戏已经开着才发现服务端没起，重登一次即可。
 - **端口被占**：`启动服务端.bat` 已经处理了这种情况——检测到端口在监听就跳过启动，直接用现成的。
   想强制重来就先运行 `停止服务端.bat`。脚本里打印的 `[跳过]` / `[启动]` 就是它实际做的动作。
-- **exe 放哪儿都行**？不行。exe 必须待在 `D:\KleinsPatch\_re\`，因为它要就地读同目录的
-  `cfg\`（58 张配置表）和 `routes.json`。日志文件也写在这个目录。
-- **游戏无反应/卡在登录**：看 `D:\KleinsPatch\_re\bizserver.log`（业务层）和
-  `D:\KleinsPatch\_re\probe.log`（HTTP 层），每次请求都有记录。
+- **exe 放哪儿**：程序目录里只需要 exe + 那几份**只读的作者配置**（`routes.json` /
+  `notice.json` / `notice_page.html` / `settings.default.json` / `baseline.json`）。
+  **存档、配置表、日志都不在这里** —— 全部落在 `%USERPROFILE%\Saved Games\freeKleins\`
+  （`saves\` / `resources\cfg\` / `logs\` / `state\`），和程序目录无关。
+  ★ 本文里的 `D:\KleinsPatch\_re\` 是**作者自己的开发副本**，不是硬性要求。
+- **游戏无反应/卡在登录**：看 `%USERPROFILE%\Saved Games\freeKleins\logs\` 下的
+  `bizserver.log`（业务层）和 `probe.log`（HTTP 层），每次请求都有记录。
 
 ## 目录导航
 
