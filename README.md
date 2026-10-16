@@ -1,3 +1,7 @@
+<p align="center">
+  <img alt="自由旅舍 FreeKleins" src="assets/banner.png" width="100%">
+</p>
+
 # FreeKleins
 
 让**已停运**的《环行旅舍》(Kleins) 在自己的电脑上重新跑起来。
