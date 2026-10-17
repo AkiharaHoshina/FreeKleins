@@ -32,7 +32,7 @@
 ### 1. 拿补丁器，先给客户端打补丁
 
 去 [openKleinsPatcher 的 Releases](https://github.com/AkiharaHoshina/openKleinsPatcher/releases)
-下 `openKleinsPatcher-v0.9.1.zip`，解压。
+下 `openKleinsPatcher-*.zip`（取最新的那个），解压。
 
 **先把游戏彻底关掉**（它占着要改的文件），双击 `kleinspatcher.exe`：
 
@@ -50,7 +50,7 @@
 ### 2. 拿服务端并开服
 
 去 [openKleinsServer 的 Releases](https://github.com/AkiharaHoshina/openKleinsServer/releases)
-下 `openKleinsServer-v0.9.1.zip`，解压到一个**空目录**（别放在受保护的位置），双击 `启动服务端.bat`。
+下 `openKleinsServer-*.zip`（取最新的那个），解压到一个**空目录**（别放在受保护的位置），双击 `启动服务端.bat`。
 
 窗口里出现 `[OK] HTTP 层 127.0.0.1:10300` / `[OK] 业务层 127.0.0.1:10301` 就算起来了。
 关服务端就双击 `停止服务端.bat`。
