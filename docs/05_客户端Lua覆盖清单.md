@@ -265,3 +265,20 @@ python inject_queue_slot.py --revert      # 槽位制实验（已废弃，确保
 | `inject_cfgdump.py` | `logic/common/config_data_center.lua` | 包装 `getConfigData`，首次访问配置时把 `PROACTIVE` 清单里的表 dump 成 `cfg\<name>.txt`。**2026-10-14 追加** `dataconfig_recruit_ui_config` 等表名后重新应用 |
 | `inject_shop.py` | 商店三件（见 [03 §商店](03_业务层_10301_CSPKG.md)） | 绕过支付 SDK + 月卡弹窗诊断（`_re\shop_spy.log`） |
 | `inject_gift.py` | 三个子商城的 `Open` | LabelList 兜底 + `_re\gift_spy.log` |
+
+### `inject_recruit.py` 追加：限定池 `pool_type=4`（2026-10-18）
+
+限定池在 `dataconfig_recruit_pools` 里是 **`pool_type = 4`**，而客户端的
+`EnmRecruitPoolType` 枚举只有 `0=None / 1=Normal / 2=Up / 3=NewHand` —— 4 是
+**未定义值**。选中这种池子时 `view_recruit_pay_ui_orig.ChangePool` 会
+`attempt to index a nil value`，表现为「点不吹霜池只有小部件动、海报不动、左侧索引不变」。
+
+修法（补丁层，不动游戏文件）：
+
+* `config_data_center.getConfigDataByID('dataconfig_recruit_pools', 'pool_id', 31)`
+  返回一个 **Lua 代理表**（`__index` 只覆盖 `pool_type = 2`，其余字段透传 userdata 原值）；
+* 服务端 `build_recruit_info` 下发时也把 4 映射成 2（`Enm_RecruitPoolType_Up`）。
+
+★ 配置行是 **C# userdata**，不能 `pairs()` 复制 —— 必须用代理表。
+★ 期间曾误判为 `cardpool_restrict_*` 面板不兼容、临时换成通用面板，**已撤销**，
+  海报恢复本池原画。
