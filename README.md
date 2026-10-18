@@ -14,7 +14,7 @@
 
 >**Steam**版本的环行旅舍仍然上架，所以你可以在 [**Steam**](https://store.steampowered.com/app/2580980/_/)获得客户端。需要注意的是，你需要登陆Steam客户端搜索游戏，这个链接无法在网页浏览器上访问
 ><p align="center">
-  <img src="assets/steam.png" width="40%">
+  <img src="assets/steambanner.png" width="40%">
 </p>
 
 
